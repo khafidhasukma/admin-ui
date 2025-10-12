@@ -1,49 +1,70 @@
 import "./App.css";
 
 function App() {
+  const courses = [
+    {
+      title: "System Administration and IT Infrastructure Services",
+    },
+    {
+      title: "Operating Systems Becoming a Power User",
+    },
+    {
+      title: "The Bits and Bytes of Computer Networking",
+    },
+    {
+      title: "Technical Support Fundamentals",
+    },
+    {
+      title: "How to Succeed at: Writing Applications",
+    },
+    {
+      title: "Medicine Administration for Carers",
+    },
+  ];
+
   return (
-    <div className="container px-5 bg-gray-100 min-h-screen flex justify-center items-center">
-      <div className="grid md:grid-cols-2 max-w-2xl lg:max-w-3xl w-full rounded-lg overflow-hidden shadow">
-        <div className="col max-md:hidden bg-gray-200 w-full flex justify-center items-center">
-          <h1 className="text-4xl font-semibold text-gray-500">600 x 500</h1>
-        </div>
-        <div className="col bg-white w-full px-6 pt-5 pb-12">
-          <h1 className="text-2xl text-center font-semibold">Login</h1>
-          <div className="space-y-4">
-            {/* Email */}
-            <div className="space-y-1">
-              <label htmlFor="email" className="block font-semibold text-sm">
-                Email
-              </label>
-              <input
-                type="email"
-                id="email"
-                className="border border-gray-300 focus:outline-blue-600 rounded-md p-2 w-full"
-                placeholder="Masukkan email"
-              />
-            </div>
-            {/* Password */}
-            <div className="space-y-1">
-              <label htmlFor="password" className="block font-semibold text-sm">
-                Password
-              </label>
-              <input
-                type="password"
-                id="password"
-                className="border border-gray-300 focus:outline-blue-600 rounded-md p-2 w-full"
-                placeholder="Masukkan password"
-              />
+    <div className="p-6 grid grid-cols-1 md:grid-cols-3 gap-6">
+      {courses.map((course, index) => (
+        <div
+          key={index}
+          className="shadow rounded-lg overflow-hidden flex flex-col hover:border hover:border-gray-500 hover:shadow-lg  hover:scale-105 transition-transform duration-300">
+          {/* Image */}
+          <img src="https://www.placehold.co/200x400" alt={course.title} className="w-full h-44 object-cover" />
+
+          {/* Content */}
+          <div className="p-4 bg-red-100 flex flex-col justify-between h-full">
+            <h3 className="text-lg font-semibold mb-4">{course.title}</h3>
+
+            <div className="bg-red-50 p-2 rounded-lg">
+              <div className="text-sm text-gray-500 mt-2 flex justify-between">
+                <span>👥 123 users</span>
+                <span>⏱ 60 min</span>
+              </div>
+
+              {/* Author */}
+              <div className="mt-3 mb-2 flex items-center gap-2">
+                <img
+                  src="https://www.placehold.co/50x50"
+                  alt="Author's Avatar"
+                  className="w-12 h-12 rounded-full object-cover"
+                />
+                <div>
+                  <p className="text-sm font-medium">Author's Name</p>
+                  <p className="text-xs text-gray-500">Designer</p>
+                </div>
+              </div>
             </div>
 
-            {/* Button Submit */}
-            <button
-              type="submit"
-              className="bg-blue-500 text-white rounded-md p-2 w-full cursor-pointer hover:bg-blue-600 transition duration-300">
-              Login
-            </button>
+            {/* Footer */}
+            <div className="mt-4 flex items-center justify-between">
+              <div className="bg-white py-2 px-4 rounded">$123</div>
+              <button className="bg-red-700 text-white px-4 py-2 rounded text-sm hover:bg-red-900 active:bg-red-500">
+                Get Started
+              </button>
+            </div>
           </div>
         </div>
-      </div>
+      ))}
     </div>
   );
 }
