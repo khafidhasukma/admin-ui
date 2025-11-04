@@ -15,7 +15,6 @@ function UserCard(props) {
           <span className="font-medium">Address:</span> {street}, {city}
         </p>
 
-        {/* Menampilkan data tambahan dari rest */}
         {Object.entries(rest).map(([key, value]) => (
           <p key={key} className="text-gray-600">
             <span className="font-medium capitalize">{key}:</span> {value}
