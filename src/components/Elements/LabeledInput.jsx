@@ -1,15 +1,10 @@
-import React, { useState } from "react";
+import React from "react";
+import Input from "./Input";
 
 function LabeledInput(props) {
   const { label, id, type, forgotPassword, ...rest } = props;
-  const [showPassword, setShowPassword] = useState(false);
 
   const isPasswordType = type === "password";
-  const inputType = isPasswordType && showPassword ? "text" : type;
-
-  const togglePasswordVisibility = () => {
-    setShowPassword(!showPassword);
-  };
 
   if (!isPasswordType) {
     return (
@@ -17,12 +12,7 @@ function LabeledInput(props) {
         <label htmlFor={id} className="block text-sm lg:text-base font-medium mb-2">
           {label}
         </label>
-        <input
-          className="py-3 px-4 text-sm rounded-md w-full bg-special-mainBg border border-gray-03 text-gray-01 focus:border-primary focus:outline-none focus:ring-0"
-          id={id}
-          type={type}
-          {...rest}
-        />
+        <Input id={id} type={type} {...rest} />
       </>
     );
   }
@@ -39,20 +29,7 @@ function LabeledInput(props) {
           </a>
         )}
       </div>
-      <div className="relative">
-        <input
-          type={inputType}
-          className="py-3 px-4 text-sm rounded-md w-full bg-special-mainBg border border-gray-03 text-gray-01 focus:border-primary focus:outline-none focus:ring-0"
-          id={id}
-          {...rest}
-        />
-        <img
-          src="/img/icons/eye.svg"
-          alt="Toggle password visibility"
-          className="absolute right-4 top-1/2 -translate-y-1/2 cursor-pointer w-5 h-5"
-          onClick={togglePasswordVisibility}
-        />
-      </div>
+      <Input id={id} type={type} {...rest} />
     </>
   );
 }
