@@ -1,6 +1,5 @@
-import { createContext, useState } from "react";
-
-export const ThemeContext = createContext();
+import { useState } from "react";
+import { ThemeContext } from "./ThemeContext.jsx";
 
 export const ThemeContextProvider = ({ children }) => {
   const [theme, setTheme] = useState({ name: "theme-green", color: "#299D91" });
