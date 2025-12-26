@@ -1,4 +1,7 @@
 import { BarChart } from "@mui/x-charts/BarChart";
+import * as React from "react";
+import { ThemeContext } from "../../context/ThemeContext";
+import { useContext } from "react";
 
 const chartSetting = {
   height: 300,
@@ -24,12 +27,17 @@ const chartSetting = {
 
 export default function BarsDataset(props) {
   const { dataset } = props;
+  const { theme } = useContext(ThemeContext);
+
+  const expensesSeries = dataset.series.map((item) => {
+    return item.dataKey === "amountLastWeek" ? { ...item, color: theme.color } : item;
+  });
 
   return (
     <BarChart
       dataset={dataset.data}
       xAxis={[{ dataKey: dataset.dataKey }]}
-      series={dataset.series}
+      series={expensesSeries}
       {...chartSetting}
       categoryGapRatio={0.5}
     />
