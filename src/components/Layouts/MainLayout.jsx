@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import Logo from "../Elements/Logo";
 import Input from "../Elements/Input";
 import NotificationsIcon from "@mui/icons-material/Notifications";
@@ -7,6 +7,8 @@ import { NavLink } from "react-router-dom";
 import { ThemeContext } from "../../context/ThemeContext";
 import { AuthContext } from "../../context/authContext";
 import { logoutService } from "../../services/authService";
+import Backdrop from "@mui/material/Backdrop";
+import CircularProgress from "@mui/material/CircularProgress";
 
 function MainLayout(props) {
   const { children } = props;
@@ -31,7 +33,10 @@ function MainLayout(props) {
   const { theme, setTheme } = useContext(ThemeContext);
 
   const { user, logout } = useContext(AuthContext);
+  const [loggingOut, setLoggingOut] = useState(false);
+
   const handleLogout = async () => {
+    setLoggingOut(true);
     try {
       await logoutService();
       logout();
@@ -40,6 +45,8 @@ function MainLayout(props) {
       if (err.status === 401) {
         logout();
       }
+    } finally {
+      setLoggingOut(false);
     }
   };
 
@@ -126,6 +133,13 @@ function MainLayout(props) {
           <main className="flex-1 px-6 py-4">{children}</main>
         </div>
       </div>
+
+      <Backdrop sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }} open={loggingOut}>
+        <div className="flex flex-col items-center">
+          <CircularProgress color="inherit" />
+          <div className="mt-4">Logging Out...</div>
+        </div>
+      </Backdrop>
     </>
   );
 }
